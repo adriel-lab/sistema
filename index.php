@@ -45,6 +45,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -126,40 +129,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="container">
       <div class="row gy-4 d-flex justify-content-between">
         <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h2 data-aos="fade-up">Your Lightning Fast Delivery Partner</h2>
-          <p data-aos="fade-up" data-aos-delay="100">Facere distinctio molestiae nisi fugit tenetur repellat non praesentium nesciunt optio quis sit odio nemo quisquam. eius quos reiciendis eum vel eum voluptatem eum maiores eaque id optio ullam occaecati odio est possimus vel reprehenderit</p>
+          <h2 data-aos="fade-up">Modernize seu evento!</h2>
+          <p data-aos="fade-up" data-aos-delay="100">Não perca tempo controlando em planilhas ou no papel.</p>
 
     
 
           <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
 
-            <div class="col-lg-3 col-6">
-              <div class="stats-item text-center w-100 h-100">
-                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Clients</p>
-              </div>
-            </div><!-- End Stats Item -->
-
-            <div class="col-lg-3 col-6">
-              <div class="stats-item text-center w-100 h-100">
-                <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Projects</p>
-              </div>
-            </div><!-- End Stats Item -->
-
-            <div class="col-lg-3 col-6">
-              <div class="stats-item text-center w-100 h-100">
-                <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Support</p>
-              </div>
-            </div><!-- End Stats Item -->
-
-            <div class="col-lg-3 col-6">
-              <div class="stats-item text-center w-100 h-100">
-                <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Workers</p>
-              </div>
-            </div><!-- End Stats Item -->
+            <p>A CONGREGAÇÃO CRISTÃ é uma comunidade religiosa inteiramente fundamentada na doutrina e Fé apostólicas contidas no Novo Testamento da Bíblia Sagrada. A CONGREGAÇÃO CRISTÃ tem origem num pequeno grupo de evangélicos italianos que, na cidade de Chicago nos Estados Unidos da América, no ano de 1904, passou a se reunir em suas casas, buscando a guia Divina para seguir os ensinamentos bíblicos cristãos, dentro da simplicidade da Fé apostólica.</p>
 
           </div>
         </div>
@@ -257,15 +234,76 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
     </section><!-- End About Us Section -->
 
-    <!-- ======= Services Section ======= -->
+
+
+    <!-- ======= Noticias ======= -->
+    <!-- ======= Noticias ======= -->
+
     <section id="service" class="services pt-0">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <span>Our Services</span>
-          <h2>Our Services</h2>
+          <span>Noticias</span>
+          <h2>Noticias</h2>
 
         </div>
+
+
+
+        <!-- Noticias -->
+        <!-- Noticias -->
+
+        <div class="row gy-4">
+  <?php
+   include('./BD/conexao.php');
+    // Seleciona as 6 notícias mais recentes
+    $query = "SELECT * FROM news ORDER BY id DESC LIMIT 6 ";
+    $result = mysqli_query($conn, $query);
+
+    // Loop através das notícias
+    while ($row = mysqli_fetch_assoc($result)) {
+      // Imprime um card com as informações da notícia
+      echo '<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">';
+      echo '<div class="card">';
+      echo '<div class="card-img">';
+      echo '<img src="assets/img/storage-service.jpg" alt="" class="img-fluid">';
+      echo ' </div>';
+      echo '<div class="card-body">';
+      echo '<h3><a href="service-details.html" class="stretched-link">' .  $row['title'] . '</a></h3>';
+      echo '<p class="card-text">' . $row['content'] . '</p>';
+      echo '<a href="#" class="card-link">Por ' . $row['author'] . ' em ' . $row['date'] . '</a>';
+      echo '</div>';
+      echo '</div>';
+      echo '</div>';
+      
+    }
+  ?>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Noticias -->
+<!-- Noticias -->
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div class="row gy-4">
 
