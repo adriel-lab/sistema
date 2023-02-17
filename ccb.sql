@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 16-Fev-2023 às 17:04
+-- Generation Time: 17-Fev-2023 às 17:46
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 5.6.40
 
@@ -21,6 +21,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `ccb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `content` text NOT NULL,
+  `author` text NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `content`, `author`, `date`) VALUES
+(1, 'Teste', 'dwdsvydwdwdwgvcwvquduchecssssa', 'Adriel Dias', '2023-02-17'),
+(2, 'teste 2f', 'sdfsfsfdgdsggdgdsgsg', 'Adriel Dias', '2023-02-17'),
+(3, 'tred', 'dsdsdsdsds', 'tredds', '2023-02-17'),
+(4, 'tred2', 'bom teste', 'tredds', '2023-02-17'),
+(5, 'teste final 1', 'etetetetetetetetet', 'Teste final 1', '2023-02-16');
 
 -- --------------------------------------------------------
 
@@ -48,6 +73,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `level`) VALUES
 --
 
 --
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -56,6 +87,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
