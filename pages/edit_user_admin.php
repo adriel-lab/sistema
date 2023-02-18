@@ -1,6 +1,6 @@
-<?php  include('../BD/conexao.php');
- ?>
-
+<?php  
+include('../BD/conexao.php');
+?>
 <?php
 
 session_start();
@@ -26,6 +26,14 @@ if(isset($_GET['id'])) {
     $username = $row['username'];
     $email = $row['password'];
     $level = $row['level'];
+    $cpf = $row['cpf'];
+    $birthdate = $row['birthdate'];
+    $baptismdate = $row['baptismdate'];
+    $fathername = $row['fathername'];
+    $mothername = $row['mothername'];
+    $congregation = $row['congregation'];
+    $phone = $row['phone'];
+    $gender = $row['gender'];
   } else {
     echo "Usuário não encontrado.";
     exit();
@@ -39,8 +47,28 @@ if(isset($_POST['submit'])) {
   $new_username = $_POST['username'];
   $new_email = $_POST['email'];
   $new_level = $_POST['level'];
+  $new_cpf = $_POST['cpf'];
+  $new_birthdate = $_POST['birthdate'];
+  $new_baptismdate = $_POST['baptismdate'];
+  $new_fathername = $_POST['fathername'];
+  $new_mothername = $_POST['mothername'];
+  $new_congregation = $_POST['congregation'];
+  $new_phone = $_POST['phone'];
+  $new_gender = $_POST['gender'];
 
-  $sql = "UPDATE users SET username='$new_username', password='$new_email', level='$new_level' WHERE id=$id";
+  $sql = "UPDATE users SET 
+          username='$new_username', 
+          password='$new_email', 
+          level='$new_level', 
+          cpf='$new_cpf', 
+          birthdate='$new_birthdate', 
+          baptismdate='$new_baptismdate', 
+          fathername='$new_fathername', 
+          mothername='$new_mothername', 
+          congregation='$new_congregation', 
+          phone='$new_phone', 
+          gender='$new_gender'
+          WHERE id=$id";
 
   if ($conn->query($sql) === TRUE) {
     echo "Informações do usuário atualizadas com sucesso.";
@@ -53,32 +81,54 @@ if(isset($_POST['submit'])) {
   exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>Editar Usuário</title>
 </head>
 <body>
-
 <h1>Editar Usuário</h1>
-
 <form method="post">
   <label for="username">Nome de Usuário:</label>
   <input type="text" id="username" name="username" value="<?php echo $username; ?>"><br>
+<label for="email">Senha</label>
+<input type="text" id="email" name="email" value="<?php echo $email; ?>"><br>
 
-  <label for="email">Senha</label>
-  <input type="text" id="email" name="email" value="<?php echo $email; ?>"><br>
+<label for="level">Nível de Acesso:</label>
+<select id="level" name="level">
+<option value="user" <?php if($level == 'user') echo 'selected'; ?>>Usuário</option>
 
-  <label for="level">Nível de Acesso:</label>
-  <select id="level" name="level">
-    <option value="user" <?php if($level == 'user') echo 'selected'; ?>>Usuário</option>
-   
-   
-  </select><br>
+</select><br>
+
+<label for="cpf">CPF:</label>
+<input type="text" id="cpf" name="cpf" value="<?php echo $cpf; ?>"><br>
+
+<label for="birthdate">Data de Nascimento:</label>
+<input type="date" id="birthdate" name="birthdate" value="<?php echo $birthdate; ?>"><br>
+
+<label for="baptismdate">Data de Batismo:</label>
+<input type="date" id="baptismdate" name="baptismdate" value="<?php echo $baptismdate; ?>"><br>
+
+<label for="fathername">Nome do Pai:</label>
+<input type="text" id="fathername" name="fathername" value="<?php echo $fathername; ?>"><br>
+
+<label for="mothername">Nome da Mãe:</label>
+<input type="text" id="mothername" name="mothername" value="<?php echo $mothername; ?>"><br>
+
+<label for="congregation">Congregação:</label>
+<input type="text" id="congregation" name="congregation" value="<?php echo $congregation; ?>"><br>
+
+<label for="phone">Telefone:</label>
+<input type="text" id="phone" name="phone" value="<?php echo $phone; ?>"><br>
+
+<label for="gender">Gênero:</label>
+<select id="gender" name="gender">
+<option value="Masculino" <?php if($gender == 'Masculino') echo 'selected'; ?>>Masculino</option>
+<option value="Feminino" <?php if($gender == 'Feminino') echo 'selected'; ?>>Feminino</option>
+<option value="Outro" <?php if($gender == 'Outro') echo 'selected'; ?>>Outro</option>
+</select><br>
 
   <input type="submit" name="submit" value="Atualizar">
 </form>
-
 </body>
-</html>
+</html> 

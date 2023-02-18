@@ -98,7 +98,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
       <a href="index.php" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>CCB</h1>
+        <h1>ModernizeMe</h1>
       </a>
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -136,7 +136,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
           <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
 
-            <p>A CONGREGAÇÃO CRISTÃ é uma comunidade religiosa inteiramente fundamentada na doutrina e Fé apostólicas contidas no Novo Testamento da Bíblia Sagrada. A CONGREGAÇÃO CRISTÃ tem origem num pequeno grupo de evangélicos italianos que, na cidade de Chicago nos Estados Unidos da América, no ano de 1904, passou a se reunir em suas casas, buscando a guia Divina para seguir os ensinamentos bíblicos cristãos, dentro da simplicidade da Fé apostólica.</p>
+            <p>A Congregação Cristã é uma comunidade religiosa que se baseia integralmente na doutrina e fé apostólicas contidas no Novo Testamento da Bíblia Sagrada. Desde sua origem, em 1904, quando um pequeno grupo de evangélicos italianos se reunia em suas casas na cidade de Chicago, nos Estados Unidos da América, a Congregação Cristã tem buscado a guia divina para seguir os ensinamentos bíblicos cristãos com simplicidade e devoção.
+
+Com o passar dos anos, a Congregação Cristã cresceu e se espalhou pelo mundo, mantendo sempre seus valores fundamentais de simplicidade, devoção e comunhão com Deus. Hoje, a Congregação Cristã no Brasil é uma das maiores e mais atuantes comunidades da Congregação Cristã no mundo, com milhões de fiéis e centenas de templos espalhados por todo o país.
+
+Em conjunto com a Congregação Cristã, a ModernizeMe se dedica a auxiliar no processo de cadastramento de jovens na comunidade religiosa. Através de soluções tecnológicas inovadoras e criativas, a ModernizeMe busca tornar o processo de cadastro mais acessível e ágil, facilitando o ingresso de jovens na Congregação Cristã.
+
+</p>
 
           </div>
         </div>
@@ -201,9 +207,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
           </div>
           <div class="col-lg-6 content order-last  order-lg-first">
-            <h3>About Us</h3>
+            <h3>Sobre nós</h3>
             <p>
-              Dolor iure expedita id fuga asperiores qui sunt consequatur minima. Quidem voluptas deleniti. Sit quia molestiae quia quas qui magnam itaque veritatis dolores. Corrupti totam ut eius incidunt reiciendis veritatis asperiores placeat.
+            ModernizeMe é uma marca que tem como objetivo ajudar os organizadores de eventos a modernizar seus processos e trazer inovação para seus eventos, tornando-os mais atraentes e envolventes para os participantes. Além disso, a empresa se dedica a auxiliar na gestão de cadastro de jovens na Congregação Cristã no Brasil.
             </p>
             <ul>
               <li data-aos="fade-up" data-aos-delay="100">
@@ -254,30 +260,36 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- Noticias -->
 
         <div class="row gy-4">
-  <?php
+        <?php
    include('./BD/conexao.php');
     // Seleciona as 6 notícias mais recentes
     $query = "SELECT * FROM news ORDER BY id DESC LIMIT 6 ";
     $result = mysqli_query($conn, $query);
 
-    // Loop através das notícias
-    while ($row = mysqli_fetch_assoc($result)) {
-      // Imprime um card com as informações da notícia
-      echo '<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">';
-      echo '<div class="card">';
-      echo '<div class="card-img">';
-      echo '<img src="assets/img/storage-service.jpg" alt="" class="img-fluid">';
-      echo ' </div>';
-      echo '<div class="card-body">';
-      echo '<h3><a href="service-details.html" class="stretched-link">' .  $row['title'] . '</a></h3>';
-      echo '<p class="card-text">' . $row['content'] . '</p>';
-      echo '<h6><a href="service-details.html" class="card-link">Por ' .  $row['author'] . ' em ' . $row['date'] . '</a></h6>';
-      echo '</div>';
-      echo '</div>';
-      echo '</div>';
-      
+    // Verifica se há notícias
+    if (mysqli_num_rows($result) > 0) {
+        // Loop através das notícias
+        while ($row = mysqli_fetch_assoc($result)) {
+            // Imprime um card com as informações da notícia
+            echo '<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">';
+            echo '<div class="card">';
+            echo '<div class="card-img">';
+            echo '<img src="assets/img/storage-service.jpg" alt="" class="img-fluid">';
+            echo ' </div>';
+            echo '<div class="card-body">';
+            echo '<h3><a href="service-details.html" class="stretched-link">' .  $row['title'] . '</a></h3>';
+            echo '<p class="card-text">' . $row['content'] . '</p>';
+            echo '<h6><a href="service-details.html" class="card-link">Por ' .  $row['author'] . ' em ' . $row['date'] . '</a></h6>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+        }
+    } else {
+      echo '<div class="alert alert-danger" role="alert">';
+        echo 'Não há notícias no momento.';
+        echo '</div>';
     }
-  ?>
+?>
 </div>
 
 
@@ -805,14 +817,31 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
   <?php } ?>
 
   <form method="POST">
-    <label for="username">Usuário:</label>
-    <input type="text" name="username" id="username" required><br>
+  <div class="form-outline mb-4">
+    <input type="text" name="username" id="username" class="form-control" required />
+    <label class="form-label" for="username">Usuário</label>
+  </div>
 
-    <label for="password">Senha:</label>
-    <input type="password" name="password" id="password" required><br>
+  <div class="form-outline mb-4">
+    <input type="password" name="password" id="password" class="form-control" required />
+    <label class="form-label" for="password">Senha</label>
+  </div>
 
-    <button type="submit">Entrar</button>
-  </form>
+  <div class="row mb-4">
+    <div class="col d-flex justify-content-center">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="remember-me" checked />
+        <label class="form-check-label" for="remember-me">Lembrar-me</label>
+      </div>
+    </div>
+
+    <div class="col">
+      <a href="#">Esqueceu a senha?</a>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: #0d42ff;">Entrar</button>
+</form>
 </div>
   </div>
   <script>
