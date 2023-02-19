@@ -801,6 +801,17 @@ Em conjunto com a Congregação Cristã, a ModernizeMe se dedica a auxiliar no p
       text-decoration: none;
       cursor: pointer;
     }
+    .modal-content {
+  width: 80%;
+  max-width: 600px;
+  height: auto;
+  margin: auto;
+}
+@media (max-width: 576px) {
+  .modal {
+    z-index: 1050;
+  }
+}
   </style>
 </head>
 <body>
@@ -808,42 +819,41 @@ Em conjunto com a Congregação Cristã, a ModernizeMe se dedica a auxiliar no p
   
   
   <!-- Modal -->
-  <div id="modal" class="modal"<?php if($modal_open) { echo ' style="display: block;"'; } ?>>
+  <div id="modal" class="modal <?php if($modal_open) { echo 'show'; } ?>" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h1>Login</h1>
-      <?php if(isset($error_message)) { ?>
-    <p><?php echo $error_message; ?></p>
-  <?php } ?>
-
-  <form method="POST">
-  <div class="form-outline mb-4">
-    <input type="text" name="username" id="username" class="form-control" required />
-    <label class="form-label" for="username">Usuário</label>
-  </div>
-
-  <div class="form-outline mb-4">
-    <input type="password" name="password" id="password" class="form-control" required />
-    <label class="form-label" for="password">Senha</label>
-  </div>
-
-  <div class="row mb-4">
-    <div class="col d-flex justify-content-center">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="remember-me" checked />
-        <label class="form-check-label" for="remember-me">Lembrar-me</label>
+      <div class="modal-header">
+        <h5 class="modal-title">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <?php if(isset($error_message)) { ?>
+          <div class="alert alert-danger" role="alert"><?php echo $error_message; ?></div>
+        <?php } ?>
+        <form method="POST">
+          <div class="form-group">
+            <label for="username">Usuário</label>
+            <input type="text" name="username" id="username" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" name="password" id="password" class="form-control" required />
+          </div>
+          <div class="form-group form-check">
+            <input class="form-check-input" type="checkbox" value="" id="remember-me" checked />
+            <label class="form-check-label" for="remember-me">Lembrar-me</label>
+          </div>
+          <div class="text-right">
+            <a href="#">Esqueceu a senha?</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" style="background-color: #0d42ff;">Entrar</button>
+        </form>
       </div>
     </div>
-
-    <div class="col">
-      <a href="#">Esqueceu a senha?</a>
-    </div>
   </div>
-
-  <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: #0d42ff;">Entrar</button>
-</form>
 </div>
-  </div>
   <script>
     // Selecionar os elementos necessários
     var openModalButton = document.getElementById('open-modal');
