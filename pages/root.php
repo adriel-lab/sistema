@@ -77,5 +77,90 @@ if(!isset($_SESSION['username']) || $_SESSION['level'] != 'root') {
   <textarea id="conteudo" name="conteudo" required></textarea><br>
   <input type="submit" name="submit" value="Adicionar Notícia">
 </form>
+
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+  // Verifica se todos os campos foram preenchidos
+  if (isset($_POST['name'], $_POST['function'], $_POST['stars'], $_POST['description'], $_FILES['image'])) {
+
+    // Conecta ao banco de dados
+    
+
+    // Verifica se a conexão foi bem sucedida
+    if ($conn->connect_error) {
+      die('Connection failed: ' . $conn->connect_error);
+    }
+
+    // Prepara os dados do formulário
+    $name = $_POST['name'];
+    $function = $_POST['function'];
+    $stars = $_POST['stars'];
+    $description = $_POST['description'];
+
+    // Define o caminho e nome do arquivo de imagem
+   
+
+    $uploadDir = '../upload/';
+    $uploadFile = $uploadDir . basename($_FILES['image']['name']);
+
+    // Move o arquivo da pasta temporária para a pasta de upload
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+      // Insere os dados no banco de dados
+      $sql = "INSERT INTO assistants (name, function, stars, description, image) VALUES ('$name', '$function', '$stars', '$description', '$uploadFile')";
+
+      if ($conn->query($sql) === true) {
+        echo '<p>Data added successfully!</p>';
+        exit();
+      } else {
+        echo '<p>Error adding data: ' . $conn->error . '</p>';
+      }
+    } else {
+      echo '<p>Error uploading file</p>';
+    }
+
+    // Fecha a conexão com o banco de dados
+    $conn->close();
+  } else {
+    echo '<p>All fields are required</p>';
+  }
+}
+
+?>
+
+<h2>Add New Assistant</h2>
+
+<form method="post" enctype="multipart/form-data">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" required>
+  </div>
+  <div>
+    <label for="function">Function</label>
+    <input type="text" name="function" id="function" required>
+  </div>
+  <div>
+    <label for="stars">Stars</label>
+    <input type="number" name="stars" id="stars" min="0" max="5" required>
+  </div>
+  <div>
+    <label for="description">Description</label>
+    <textarea name="description" id="description" rows="5" required></textarea>
+  </div>
+  <div>
+    <label for="image">Image</label>
+    <input type="file" name="image" id="image" required>
+  </div>
+  <button type="submit">Add Assistant</button>
+</form>
+
+
+
+
+
+
+
+
 </body>
 </html>
